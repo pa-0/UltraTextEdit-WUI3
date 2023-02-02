@@ -3,28 +3,95 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
-    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" xmlns:controls="using:CommunityToolkit.WinUI.UI.Controls"
     Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
     mc:Ignorable="d">
 
     <Grid x:Name="ContentArea">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="*" />
-        </Grid.RowDefinitions>
+        
 
-        <Grid Grid.Row="1">
-            <RichEditBox
+        <Grid>
+            <RelativePanel>
+                <StackPanel x:Name="TitleBar" Orientation="Horizontal">
+                    <Border
+                x:Name="AppTitleBar"
+                Height="40"
+                Margin="12,2,0,0"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                Canvas.ZIndex="1"
+                IsHitTestVisible="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True">
+                        <StackPanel Orientation="Horizontal">
+                            <Image
+                        x:Name="AppFontIcon"
+                        Width="24"
+                        Height="24"
+                        Margin="0,2,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Source="ms-appx:///Assets/Square44x44Logo.png" />
+                            <TextBlock
+                        x:Name="AppTitle"
+                        Margin="12,2,4,0"
+                        VerticalAlignment="Center"
+                        Text="Untitled - UTE"
+                        FontSize="12"
+                        FontWeight="Normal" Foreground="{ThemeResource SystemAccentColor}"/>
+                        </StackPanel>
+                    </Border>
+                    <Grid x:Name="InsiderGrid">
+                        <Button Background="#FFFFC225" Width="50" Height="25" Padding="0" CornerRadius="8" Click="showinsiderinfo">
+                            <Grid>
+                                <TextBlock Text="DEV" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+                            </Grid>
+                        </Button>
+                        <TeachingTip x:Name="ToggleThemeTeachingTip1"
+    Target="{x:Bind InsiderGrid}"
+    Title="Dev Channel"
+    Subtitle="The Dev Channel is the Insider Channel that receives builds with the latest features and may contain features that may not get released to the public. Beware, as these builds may be buggy or crash!">
+                            <TeachingTip.IconSource>
+                                <FontIconSource  Glyph="&#xF1AD;"/>
+                            </TeachingTip.IconSource>
+                        </TeachingTip>
+                    </Grid>
+                    <TextBlock
+                        x:Name="UnsavedTextBlock"
+                        Padding="5,0"
+                        VerticalAlignment="Center"
+                        Text="* Not Saved"
+                        ToolTipService.ToolTip="There are unsaved changes." />
+                </StackPanel>
+                <controls:TabbedCommandBar x:Name="ribbon" RelativePanel.Below="TitleBar">
+                    <!-- IsBackButtonVisible="Visible" -->
+                    <controls:TabbedCommandBar.MenuItems>
+                        <controls:TabbedCommandBarItem Header="Home">
+
+                            <AppBarToggleButton Icon="Bold" Label="Bold" />
+                            <AppBarToggleButton Icon="Italic" Label="Italic" />
+                            <AppBarToggleButton Icon="Underline" Label="Underline" />
+                        </controls:TabbedCommandBarItem>
+                    </controls:TabbedCommandBar.MenuItems>
+                </controls:TabbedCommandBar>
+                <RichEditBox
             x:Name="editor"
             IsSpellCheckEnabled="False"
             SelectionFlyout="{x:Null}"
-            TextChanged="RichEditBox_TextChanged">
-                <RichEditBox.KeyboardAccelerators>
-                    <KeyboardAccelerator Modifiers="Control" Key="B" Invoked="OnKeyboardAcceleratorInvoked" />
-                    <KeyboardAccelerator Modifiers="Control" Key="I" Invoked="OnKeyboardAcceleratorInvoked" />
-                    <KeyboardAccelerator Modifiers="Control" Key="U" Invoked="OnKeyboardAcceleratorInvoked" />
-                    <KeyboardAccelerator Modifiers="Control" Key="S" Invoked="OnKeyboardAcceleratorInvoked" />
-                </RichEditBox.KeyboardAccelerators>
-            </RichEditBox>
+            TextChanged="RichEditBox_TextChanged"
+            RelativePanel.Below="ribbon"
+                    RelativePanel.AlignLeftWithPanel="True"
+                    RelativePanel.AlignRightWithPanel="True"
+                    RelativePanel.AlignBottomWithPanel="True">
+                    <RichEditBox.KeyboardAccelerators>
+                        <KeyboardAccelerator Modifiers="Control" Key="B" Invoked="OnKeyboardAcceleratorInvoked" />
+                        <KeyboardAccelerator Modifiers="Control" Key="I" Invoked="OnKeyboardAcceleratorInvoked" />
+                        <KeyboardAccelerator Modifiers="Control" Key="U" Invoked="OnKeyboardAcceleratorInvoked" />
+                        <KeyboardAccelerator Modifiers="Control" Key="S" Invoked="OnKeyboardAcceleratorInvoked" />
+                    </RichEditBox.KeyboardAccelerators>
+                </RichEditBox>
+            </RelativePanel>
+            
         </Grid>
         
     </Grid>

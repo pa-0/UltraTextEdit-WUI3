@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Text;
+using Microsoft.UI.Xaml;
 using Microsoft.UI.Xaml.Controls;
 
 using UltraTextEdit.ViewModels;
@@ -16,6 +17,10 @@ public sealed partial class MainPage : Page
     {
         ViewModel = App.GetService<MainViewModel>();
         InitializeComponent();
+        Window window = new Window();
+        window.ExtendsContentIntoTitleBar = true;
+        window.SetTitleBar(TitleBar);
+
     }
 
     private void RichEditBox_TextChanged(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
@@ -58,5 +63,10 @@ public sealed partial class MainPage : Page
                 //SaveFile(false);
                 break;
         }
+    }
+
+    private void showinsiderinfo(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
+    {
+        ToggleThemeTeachingTip1.IsOpen = true;
     }
 }
