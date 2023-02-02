@@ -69,4 +69,44 @@ public sealed partial class MainPage : Page
     {
         ToggleThemeTeachingTip1.IsOpen = true;
     }
+
+    private void BoldButton_Click(object sender, RoutedEventArgs e)
+    {
+        Microsoft.UI.Text.ITextSelection selectedText = editor.Document.Selection;
+        if (selectedText != null)
+        {
+            Microsoft.UI.Text.ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+            charFormatting.Bold = Microsoft.UI.Text.FormatEffect.Toggle;
+            selectedText.CharacterFormat = charFormatting;
+        }
+    }
+
+    private void ItalicButton_Click(object sender, RoutedEventArgs e)
+    {
+        Microsoft.UI.Text.ITextSelection selectedText = editor.Document.Selection;
+        if (selectedText != null)
+        {
+            Microsoft.UI.Text.ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+            charFormatting.Italic = Microsoft.UI.Text.FormatEffect.Toggle;
+            selectedText.CharacterFormat = charFormatting;
+        }
+    }
+
+    private void UnderlineButton_Click(object sender, RoutedEventArgs e)
+    {
+        Microsoft.UI.Text.ITextSelection selectedText = editor.Document.Selection;
+        if (selectedText != null)
+        {
+            Microsoft.UI.Text.ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+            if (charFormatting.Underline == Microsoft.UI.Text.UnderlineType.None)
+            {
+                charFormatting.Underline = Microsoft.UI.Text.UnderlineType.Single;
+            }
+            else
+            {
+                charFormatting.Underline = Microsoft.UI.Text.UnderlineType.None;
+            }
+            selectedText.CharacterFormat = charFormatting;
+        }
+    }
 }
