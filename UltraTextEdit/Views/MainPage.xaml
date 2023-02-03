@@ -63,14 +63,36 @@
                         Text="* Not Saved"
                         ToolTipService.ToolTip="There are unsaved changes." />
                 </StackPanel>
-                <controls:TabbedCommandBar x:Name="ribbon" RelativePanel.Below="TitleBar">
+                <controls:TabbedCommandBar x:Name="ribbon" RelativePanel.Below="TitleBar" Background="Transparent">
                     <!-- IsBackButtonVisible="Visible" -->
                     <controls:TabbedCommandBar.MenuItems>
-                        <controls:TabbedCommandBarItem Header="Home">
+                        <controls:TabbedCommandBarItem Header="Home" Background="Transparent">
 
                             <AppBarToggleButton Icon="Bold" Label="Bold" Click="BoldButton_Click"/>
                             <AppBarToggleButton Icon="Italic" Label="Italic" Click="ItalicButton_Click"/>
                             <AppBarToggleButton Icon="Underline" Label="Underline" Click="UnderlineButton_Click"/>
+                            <AppBarSeparator />
+                            <AppBarButton
+                    Click="AlignLeftButton_Click"
+                    ToolTipService.ToolTip="Align left">
+                                <Viewbox MaxWidth="17" MaxHeight="17">
+                                    <SymbolIcon Symbol="AlignLeft" />
+                                </Viewbox>
+                            </AppBarButton>
+                            <AppBarButton
+                    Click="AlignCenterButton_Click"
+                    ToolTipService.ToolTip="Align center">
+                                <Viewbox MaxWidth="17" MaxHeight="17">
+                                    <SymbolIcon Symbol="AlignCenter" />
+                                </Viewbox>
+                            </AppBarButton>
+                            <AppBarButton
+                    Click="AlignRightButton_Click"
+                    ToolTipService.ToolTip="Align right">
+                                <Viewbox MaxWidth="17" MaxHeight="17">
+                                    <SymbolIcon Symbol="AlignRight" />
+                                </Viewbox>
+                            </AppBarButton>
                         </controls:TabbedCommandBarItem>
                     </controls:TabbedCommandBar.MenuItems>
                 </controls:TabbedCommandBar>
