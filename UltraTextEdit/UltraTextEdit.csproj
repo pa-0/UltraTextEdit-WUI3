@@ -68,6 +68,7 @@
     <Content Remove="Assets\Wide310x150Logo.scale-125.png" />
     <Content Remove="Assets\Wide310x150Logo.scale-150.png" />
     <Content Remove="Assets\Wide310x150Logo.scale-400.png" />
+    <Content Remove="Assets\WindowIcon.ico" />
   </ItemGroup>
 
   <ItemGroup>

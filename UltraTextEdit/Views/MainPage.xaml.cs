@@ -7,6 +7,8 @@ using Windows.Storage.Pickers;
 using Windows.Storage.Provider;
 using Windows.Storage.Streams;
 using Windows.Storage;
+using System.Runtime.InteropServices;
+using WinRT;
 
 namespace UltraTextEdit.Views;
 
@@ -22,6 +24,25 @@ public sealed partial class MainPage : Page
         get;
     }
 
+    [ComImport]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    [Guid("EECDBF0E-BAE9-4CB6-A68E-9598E1CB57BB")]
+    internal interface IWindowNative
+    {
+        IntPtr WindowHandle
+        {
+            get;
+        }
+    }
+
+    [ComImport]
+    [Guid("3E68D4BD-7135-4D10-8018-9FB6D9F33FA1")]
+    [InterfaceType(ComInterfaceType.InterfaceIsIUnknown)]
+    public interface IInitializeWithWindow
+    {
+        void Initialize(IntPtr hwnd);
+    }
+
     public MainPage()
     {
         ViewModel = App.GetService<MainViewModel>();
@@ -29,8 +50,9 @@ public sealed partial class MainPage : Page
         Window window = new Window();
         window.ExtendsContentIntoTitleBar = true;
         window.SetTitleBar(TitleBar);
+        appTitleStr= window.Title;
 
-    }
+}
 
     private void RichEditBox_TextChanged(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
@@ -152,7 +174,7 @@ public sealed partial class MainPage : Page
         string fileName = AppTitle.Text.Replace(" - " + appTitleStr, "");
         if (isCopy || fileName == "Untitled")
         {
-            FileSavePicker savePicker = new FileSavePicker();
+            FileSavePicker savePicker = App.MainWindow.CreateSaveFilePicker();
             savePicker.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
 
             // Dropdown of file types the user can save the file as
@@ -239,12 +261,12 @@ public sealed partial class MainPage : Page
     private async void OpenButton_Click(object sender, RoutedEventArgs e)
     {
         // Open a text file.
-        FileOpenPicker open = new();
+        Windows.Storage.Pickers.FileOpenPicker open = App.MainWindow.CreateOpenFilePicker();
         open.SuggestedStartLocation = PickerLocationId.DocumentsLibrary;
         open.FileTypeFilter.Add(".rtf");
         open.FileTypeFilter.Add(".txt");
 
-        StorageFile file = await open.PickSingleFileAsync();
+        Windows.Storage.StorageFile file = await open.PickSingleFileAsync();
 
         if (file != null)
         {
