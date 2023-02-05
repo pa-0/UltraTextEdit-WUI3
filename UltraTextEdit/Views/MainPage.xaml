@@ -7,6 +7,36 @@
     Background="{ThemeResource SolidBackgroundFillColorBaseBrush}"
     mc:Ignorable="d">
 
+    <Page.Resources>
+        <Style x:Key="TitleBarCaptionTextBlockStyle" TargetType="TextBlock" BasedOn="{StaticResource BaseTextBlockStyle}">
+            <Setter Property="FontSize" Value="12" />
+            <Setter Property="FontWeight" Value="Normal" />
+            <Setter Property="Foreground" Value="{ThemeResource SystemAccentColor}"/>
+        </Style>
+        <Flyout x:Key="myColorPickerFlyout">
+            <RelativePanel>
+                <ColorPicker x:Name="myColorPicker"
+                         IsColorChannelTextInputVisible="True"
+                         IsHexInputVisible="True"/>
+
+                <Grid RelativePanel.Below="myColorPicker"
+                  RelativePanel.AlignLeftWithPanel="True"
+                  RelativePanel.AlignRightWithPanel="True">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Button Content="OK" Click="ConfirmColor_Click"
+                            Style="{StaticResource AccentButtonStyle}"
+                        Margin="0,12,2,0" HorizontalAlignment="Stretch"/>
+                    <Button Content="Cancel" Click="CancelColor_Click"
+                        Margin="2,12,0,0" HorizontalAlignment="Stretch"
+                        Grid.Column="1"/>
+                </Grid>
+            </RelativePanel>
+        </Flyout>
+    </Page.Resources>
+
     <Grid x:Name="ContentArea">
         
 
@@ -136,6 +166,172 @@
                                     <SymbolIcon Symbol="AlignRight" />
                                 </Viewbox>
                             </AppBarButton>
+                            <AppBarSeparator />
+                            <AppBarElementContainer>
+                                <DropDownButton
+                    x:Name="fontColorButton"
+                    AutomationProperties.Name="Font color"
+                    BorderThickness="0"
+                    RelativePanel.AlignRightWithPanel="True"
+                    ToolTipService.ToolTip="Font color">
+                                    <SymbolIcon Symbol="FontColor" />
+                                    <DropDownButton.Flyout>
+                                        <Flyout Placement="Bottom">
+                                            <RelativePanel>
+                                                <VariableSizedWrapGrid
+                                    x:Name="colorGrid"
+                                    MaximumRowsOrColumns="4"
+                                    Orientation="Horizontal">
+                                                    <VariableSizedWrapGrid.Resources>
+                                                        <Style TargetType="Rectangle">
+                                                            <Setter Property="Width" Value="32" />
+                                                            <Setter Property="Height" Value="32" />
+                                                        </Style>
+
+                                                        <Style TargetType="Button">
+                                                            <Setter Property="Padding" Value="0" />
+                                                            <Setter Property="MinWidth" Value="0" />
+                                                            <Setter Property="MinHeight" Value="0" />
+                                                            <Setter Property="Margin" Value="5" />
+                                                            <Setter Property="CornerRadius" Value="8" />
+                                                        </Style>
+                                                    </VariableSizedWrapGrid.Resources>
+                                                    <Button
+                                        AutomationProperties.Name="Red"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="Red">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="Red" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button
+                                        AutomationProperties.Name="Orange"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="Orange">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="Orange" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button
+                                        AutomationProperties.Name="Yellow"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="Yellow">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="Yellow" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button
+                                        AutomationProperties.Name="Green"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="Green">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="Green" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button
+                                        AutomationProperties.Name="Blue"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="Blue">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="Blue" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button
+                                        AutomationProperties.Name="LightBlue"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="Light Blue">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="LightBlue" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button
+                                        AutomationProperties.Name="Indigo"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="Indigo">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="Indigo" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button
+                                        AutomationProperties.Name="Violet"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="Violet">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="Violet" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button
+                                        AutomationProperties.Name="Gray"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="Gray">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="Gray" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button
+                                        AutomationProperties.Name="Beige"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="Beige">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="Beige" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button
+                                        AutomationProperties.Name="Black"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="Black">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="Black" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                    <Button
+                                        AutomationProperties.Name="White"
+                                        Click="ColorButton_Click"
+                                        ToolTipService.ToolTip="White">
+                                                        <Button.Content>
+                                                            <Rectangle Fill="White" />
+                                                        </Button.Content>
+                                                    </Button>
+                                                </VariableSizedWrapGrid>
+                                                <Button
+                                    x:Name="colorPickerButton"
+                                    Width="173"
+                                    Margin="0,8,0,0"
+                                    Content="More colors"
+                                    Flyout="{StaticResource myColorPickerFlyout}"
+                                    RelativePanel.Below="colorGrid" />
+                                            </RelativePanel>
+                                        </Flyout>
+                                    </DropDownButton.Flyout>
+                                </DropDownButton>
+                            </AppBarElementContainer>
+                            <AppBarElementContainer>
+                                <NumberBox
+                    x:Name="FontSizeBox"
+                    MinWidth="120"
+                    Maximum="150"
+                    Minimum="8"
+                    PlaceholderText="Font size"
+                    SpinButtonPlacementMode="Compact"
+                    ValueChanged="FontSizeBox_ValueChanged"
+                    Value="11" />
+                            </AppBarElementContainer>
+                            <AppBarElementContainer>
+                                <ComboBox
+                    x:Name="FontsCombo"
+                    IsTextSearchEnabled="True"
+                    ItemsSource="{x:Bind Fonts}"
+                    PlaceholderText="Font"
+                    SelectedItem="Segoe UI"
+                    SelectionChanged="FontsCombo_SelectionChanged">
+                                    <ComboBox.ItemTemplate>
+                                        <DataTemplate x:DataType="x:String">
+                                            <TextBlock FontFamily="{x:Bind}" Text="{x:Bind}" />
+                                        </DataTemplate>
+                                    </ComboBox.ItemTemplate>
+                                </ComboBox>
+                            </AppBarElementContainer>
+                            <AppBarSeparator />
                         </controls:TabbedCommandBarItem>
                     </controls:TabbedCommandBar.MenuItems>
                 </controls:TabbedCommandBar>

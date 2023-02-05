@@ -9,6 +9,7 @@ using Windows.Storage.Streams;
 using Windows.Storage;
 using System.Runtime.InteropServices;
 using WinRT;
+using Microsoft.Graphics.Canvas.Text;
 
 namespace UltraTextEdit.Views;
 
@@ -18,6 +19,14 @@ public sealed partial class MainPage : Page
     private bool saved;
     private bool _wasOpen;
     private object fileNameWithPath;
+
+    public List<string> Fonts
+    {
+        get
+        {
+            return CanvasTextFormat.GetSystemFontFamilies().OrderBy(f => f).ToList();
+        }
+    }
 
     public MainViewModel ViewModel
     {
@@ -289,4 +298,28 @@ public sealed partial class MainPage : Page
         }
     }
 
+    private void FontsCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+    {
+
+    }
+
+    private void FontSizeBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
+    {
+
+    }
+
+    private void ColorButton_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void ConfirmColor_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
+
+    private void CancelColor_Click(object sender, RoutedEventArgs e)
+    {
+
+    }
 }
