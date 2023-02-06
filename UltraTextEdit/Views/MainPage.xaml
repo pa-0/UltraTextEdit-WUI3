@@ -332,6 +332,14 @@
                                 </ComboBox>
                             </AppBarElementContainer>
                             <AppBarSeparator />
+                            <AppBarButton ToolTipService.ToolTip="Find" Click="FindButton2_Click">
+                                <Button.Content>
+                                    <Viewbox MaxWidth="17" MaxHeight="17">
+                                        <SymbolIcon Symbol="Find" />
+                                    </Viewbox>
+                                </Button.Content>
+                            </AppBarButton>
+                            <AppBarSeparator />
                             <AppBarToggleButton Click="SubscriptButton_Click" Label="Subscript">
                                 <AppBarToggleButton.Icon>
                                     <PathIcon Data="M16.488 4.43a.75.75 0 0 1 .082 1.058L10.988 12l5.032 5.871c-.302.41-.555.906-.682 1.51L10 13.151l-5.43 6.336a.75.75 0 0 1-1.14-.976L9.013 12 3.431 5.488a.75.75 0 0 1 1.139-.976L10 10.848l5.43-6.336a.75.75 0 0 1 1.058-.081ZM17.75 15.523c0-.528.444-1.023.986-1.023.407 0 .735.19.893.434.136.21.218.566-.093 1.095-.15.255-.376.482-.682.724-.152.12-.316.237-.493.363l-.074.052c-.152.107-.315.222-.472.34-.744.56-1.565 1.346-1.565 2.742 0 .414.336.75.75.75h3.451a.75.75 0 0 0 0-1.5h-2.513c.16-.282.423-.525.779-.793.137-.103.279-.203.432-.312l.078-.054c.178-.127.37-.264.557-.41.372-.295.76-.658 1.045-1.142.557-.948.546-1.921.058-2.672C20.42 13.4 19.59 13 18.736 13c-1.478 0-2.486 1.278-2.486 2.523a.75.75 0 0 0 1.5 0Z"/>
@@ -346,22 +354,73 @@
                         </controls:TabbedCommandBarItem>
                     </controls:TabbedCommandBar.MenuItems>
                 </controls:TabbedCommandBar>
-                <RichEditBox
+                <SplitView
+            RelativePanel.AlignBottomWithPanel="True"
+            RelativePanel.AlignLeftWithPanel="True"
+            RelativePanel.AlignRightWithPanel="True"
+            RelativePanel.Below="ribbon"
+            Background="Transparent"
+            PaneBackground="Transparent"
+            IsPaneOpen="False" OpenPaneLength="256" CompactPaneLength="24" DisplayMode="Inline" PanePlacement="Right" x:Name="textsplitview">
+                    <SplitView.Pane>
+                        <Grid Background="Transparent">
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="Auto"/>
+                            </Grid.RowDefinitions>
+                            <StackPanel Orientation="Vertical" Background="Transparent">
+                                <TextBlock
+                                    Margin="0,0,0,5"
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="Find" />
+
+                                <TextBox
+                                    x:Name="findBox"
+                                    Width="330"
+                                    PlaceholderText="Text to search for" />
+                                <StackPanel Orientation="Vertical" Background="Transparent">
+                                    <Button Margin="0,10,0,0" Click="FindButton_Click" Content="Find"/>
+                                    <Button Margin="0,10,0,0" Click="RemoveHighlightButton_Click" Content="Remove Highlights"/>
+                                </StackPanel>
+
+                                <TextBlock
+                                    Margin="0,10,0,5"
+                                    FontSize="14"
+                                    FontWeight="SemiBold"
+                                    Style="{StaticResource CaptionTextBlockStyle}"
+                                    Text="Replace" />
+                                <TextBox
+                                    x:Name="replaceBox"
+                                    Width="330"
+                                    PlaceholderText="New text" />
+                                <StackPanel Orientation="Vertical">
+                                    <Button Margin="0,10,0,0" Click="ReplaceSelected_Click" Content="Replace selected text"/>
+                                    <Button Margin="0,10,0,0" Click="ReplaceAll_Click" Content="Replace all occurences"/>
+                                </StackPanel>
+                                <AppBarButton HorizontalAlignment="Center" Icon="ClosePane" Label="Close" Click="closepane"/>
+                            </StackPanel>
+                        </Grid>
+                    </SplitView.Pane>
+                    <RichEditBox
             x:Name="editor"
             IsSpellCheckEnabled="False"
             SelectionFlyout="{x:Null}"
             TextChanged="RichEditBox_TextChanged"
-            RelativePanel.Below="ribbon"
+            
                     RelativePanel.AlignLeftWithPanel="True"
                     RelativePanel.AlignRightWithPanel="True"
                     RelativePanel.AlignBottomWithPanel="True">
-                    <RichEditBox.KeyboardAccelerators>
-                        <KeyboardAccelerator Modifiers="Control" Key="B" Invoked="OnKeyboardAcceleratorInvoked" />
-                        <KeyboardAccelerator Modifiers="Control" Key="I" Invoked="OnKeyboardAcceleratorInvoked" />
-                        <KeyboardAccelerator Modifiers="Control" Key="U" Invoked="OnKeyboardAcceleratorInvoked" />
-                        <KeyboardAccelerator Modifiers="Control" Key="S" Invoked="OnKeyboardAcceleratorInvoked" />
-                    </RichEditBox.KeyboardAccelerators>
-                </RichEditBox>
+                        <RichEditBox.KeyboardAccelerators>
+                            <KeyboardAccelerator Modifiers="Control" Key="B" Invoked="OnKeyboardAcceleratorInvoked" />
+                            <KeyboardAccelerator Modifiers="Control" Key="I" Invoked="OnKeyboardAcceleratorInvoked" />
+                            <KeyboardAccelerator Modifiers="Control" Key="U" Invoked="OnKeyboardAcceleratorInvoked" />
+                            <KeyboardAccelerator Modifiers="Control" Key="S" Invoked="OnKeyboardAcceleratorInvoked" />
+                        </RichEditBox.KeyboardAccelerators>
+                    </RichEditBox>
+                </SplitView>
             </RelativePanel>
             
         </Grid>

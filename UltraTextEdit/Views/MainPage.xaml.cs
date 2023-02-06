@@ -361,4 +361,67 @@ public sealed partial class MainPage : Page
         ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
         charFormatting.Subscript = FormatEffect.Toggle;
     }
+
+    private void FindButton2_Click(object sender, RoutedEventArgs e)
+    {
+        textsplitview.IsPaneOpen = true;
+    }
+
+    private void FindBoxRemoveHighlights()
+    {
+        ITextRange documentRange = editor.Document.GetRange(0, TextConstants.MaxUnitCount);
+        SolidColorBrush defaultBackground = editor.Background as SolidColorBrush;
+        SolidColorBrush defaultForeground = editor.Foreground as SolidColorBrush;
+
+        documentRange.CharacterFormat.BackgroundColor = defaultBackground.Color;
+        documentRange.CharacterFormat.ForegroundColor = defaultForeground.Color;
+    }
+
+    private void FindBoxHighlightMatches()
+    {
+        FindBoxRemoveHighlights();
+
+        Color highlightBackgroundColor = (Color)Application.Current.Resources["SystemColorHighlightColor"];
+        Color highlightForegroundColor = (Color)Application.Current.Resources["SystemColorHighlightTextColor"];
+
+        string textToFind = findBox.Text;
+        if (textToFind != null)
+        {
+            ITextRange searchRange = editor.Document.GetRange(0, 0);
+            while (searchRange.FindText(textToFind, TextConstants.MaxUnitCount, FindOptions.None) > 0)
+            {
+                searchRange.CharacterFormat.BackgroundColor = highlightBackgroundColor;
+                searchRange.CharacterFormat.ForegroundColor = highlightForegroundColor;
+            }
+        }
+    }
+
+    private void FindButton_Click(object sender, RoutedEventArgs e)
+    {
+        FindBoxHighlightMatches();
+    }
+
+    private void RemoveHighlightButton_Click(object sender, RoutedEventArgs e)
+    {
+        FindBoxRemoveHighlights();
+    }
+
+    private void ReplaceSelected_Click(object sender, RoutedEventArgs e)
+    {
+        editor.Document.Selection.SetText(TextSetOptions.None, replaceBox.Text);
+    }
+
+    private void ReplaceAll_Click(object sender, RoutedEventArgs e)
+    {
+        editor.Document.GetText(TextGetOptions.FormatRtf, out string value);
+        if (!(string.IsNullOrWhiteSpace(value) && string.IsNullOrWhiteSpace(findBox.Text) && string.IsNullOrWhiteSpace(replaceBox.Text)))
+        {
+            editor.Document.SetText(TextSetOptions.FormatRtf, value.Replace(findBox.Text, replaceBox.Text));
+        }
+    }
+
+    private void closepane(object sender, RoutedEventArgs e)
+    {
+        textsplitview.IsPaneOpen = false;
+    }
 }
