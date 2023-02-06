@@ -10,6 +10,8 @@ using Windows.Storage;
 using System.Runtime.InteropServices;
 using WinRT;
 using Microsoft.Graphics.Canvas.Text;
+using Windows.UI;
+using Microsoft.UI.Xaml.Media;
 
 namespace UltraTextEdit.Views;
 
@@ -300,26 +302,49 @@ public sealed partial class MainPage : Page
 
     private void FontsCombo_SelectionChanged(object sender, SelectionChangedEventArgs e)
     {
-
+        if (editor.Document.Selection != null)
+        {
+            editor.Document.Selection.CharacterFormat.Name = FontsCombo.SelectedValue.ToString();
+        }
     }
 
     private void FontSizeBox_ValueChanged(NumberBox sender, NumberBoxValueChangedEventArgs args)
     {
-
+        if (editor != null && editor.Document.Selection != null)
+        {
+            ITextSelection selectedText = editor.Document.Selection;
+            ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+            charFormatting.Size = (float)sender.Value;
+            selectedText.CharacterFormat = charFormatting;
+        }
     }
 
     private void ColorButton_Click(object sender, RoutedEventArgs e)
     {
+        // Extract the color of the button that was clicked.
+        Button clickedColor = (Button)sender;
+        var rectangle = (Microsoft.UI.Xaml.Shapes.Rectangle)clickedColor.Content;
+        var color = (rectangle.Fill as SolidColorBrush).Color;
 
+        editor.Document.Selection.CharacterFormat.ForegroundColor = color;
+
+        fontColorButton.Flyout.Hide();
+        editor.Focus(FocusState.Keyboard);
     }
 
     private void ConfirmColor_Click(object sender, RoutedEventArgs e)
     {
+        // Confirm color picker choice and apply color to text
+        Color color = myColorPicker.Color;
+        editor.Document.Selection.CharacterFormat.ForegroundColor = color;
 
+        // Hide flyout
+        colorPickerButton.Flyout.Hide();
     }
 
     private void CancelColor_Click(object sender, RoutedEventArgs e)
     {
-
+        // Cancel flyout
+        colorPickerButton.Flyout.Hide();
     }
 }
