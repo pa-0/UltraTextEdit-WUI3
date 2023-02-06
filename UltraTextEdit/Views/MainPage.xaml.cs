@@ -347,4 +347,18 @@ public sealed partial class MainPage : Page
         // Cancel flyout
         colorPickerButton.Flyout.Hide();
     }
+
+    private void SubscriptButton_Click(object sender, RoutedEventArgs e)
+    {
+        ITextSelection selectedText = editor.Document.Selection;
+        ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+        charFormatting.Subscript = FormatEffect.Toggle;
+    }
+
+    private void SuperScriptButton_Click(object sender, RoutedEventArgs e)
+    {
+        ITextSelection selectedText = editor.Document.Selection;
+        ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+        charFormatting.Subscript = FormatEffect.Toggle;
+    }
 }
