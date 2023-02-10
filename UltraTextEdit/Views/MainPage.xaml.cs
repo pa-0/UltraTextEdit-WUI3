@@ -58,7 +58,7 @@ public sealed partial class MainPage : Page
     {
         ViewModel = App.GetService<MainViewModel>();
         InitializeComponent();
-        Window window = new Window();
+        MainWindow window = new MainWindow();
         window.ExtendsContentIntoTitleBar = true;
         window.SetTitleBar(TitleBar);
         appTitleStr= window.Title;
@@ -295,8 +295,8 @@ public sealed partial class MainPage : Page
             }
             saved = true;
             _wasOpen = true;
-            Windows.Storage.AccessCache.StorageApplicationPermissions.MostRecentlyUsedList.Add(file);
-            Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.AddOrReplace("CurrentlyOpenFile", file);
+            //Windows.Storage.AccessCache.StorageApplicationPermissions.MostRecentlyUsedList.Add(file);
+            //Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.AddOrReplace("CurrentlyOpenFile", file);
         }
     }
 

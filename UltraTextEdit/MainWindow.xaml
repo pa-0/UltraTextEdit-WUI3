@@ -14,4 +14,55 @@
     <windowex:WindowEx.Backdrop>
         <windowex:MicaSystemBackdrop/>
     </windowex:WindowEx.Backdrop>
+    <StackPanel x:Name="TitleBar" Orientation="Horizontal">
+        <Border
+                x:Name="AppTitleBar"
+                Height="30"
+                Margin="12,2,0,0"
+                VerticalAlignment="Top"
+                Background="Transparent"
+                Canvas.ZIndex="1"
+                IsHitTestVisible="True"
+                RelativePanel.AlignLeftWithPanel="True"
+                RelativePanel.AlignRightWithPanel="True">
+            <StackPanel Orientation="Horizontal">
+                <Image
+                        x:Name="AppFontIcon"
+                        Width="12"
+                        Height="12"
+                        Margin="0,2,0,0"
+                        HorizontalAlignment="Left"
+                        VerticalAlignment="Center"
+                        Source="Assets\WindowIcon.ico" />
+                <TextBlock
+                        x:Name="AppTitle"
+                        Margin="12,2,4,0"
+                        VerticalAlignment="Center"
+                        Text="Untitled - UTE"
+                        FontSize="12"
+                        FontWeight="Normal" Foreground="{ThemeResource SystemAccentColor}"/>
+            </StackPanel>
+        </Border>
+        <Grid x:Name="InsiderGrid" Visibility="Collapsed">
+            <Button Background="#FFFFC225" Width="50" Height="25" Padding="0" CornerRadius="8" Click="showinsiderinfo">
+                <Grid>
+                    <TextBlock Text="DEV" TextAlignment="Center" VerticalAlignment="Center" FontWeight="Bold"></TextBlock>
+                </Grid>
+            </Button>
+            <TeachingTip x:Name="ToggleThemeTeachingTip1"
+    Target="{x:Bind InsiderGrid}"
+    Title="Dev Channel"
+    Subtitle="The Dev Channel is the Insider Channel that receives builds with the latest features and may contain features that may not get released to the public. Beware, as these builds may be buggy or crash!">
+                <TeachingTip.IconSource>
+                    <FontIconSource  Glyph="&#xF1AD;"/>
+                </TeachingTip.IconSource>
+            </TeachingTip>
+        </Grid>
+        <TextBlock
+                        x:Name="UnsavedTextBlock"
+                        Padding="5,0"
+                        VerticalAlignment="Center"
+                        Text="* Not Saved"
+                        ToolTipService.ToolTip="There are unsaved changes." />
+    </StackPanel>
 </windowex:WindowEx>

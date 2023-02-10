@@ -45,7 +45,7 @@
                 <StackPanel x:Name="TitleBar" Orientation="Horizontal">
                     <Border
                 x:Name="AppTitleBar"
-                Height="40"
+                Height="30"
                 Margin="12,2,0,0"
                 VerticalAlignment="Top"
                 Background="Transparent"
@@ -56,12 +56,12 @@
                         <StackPanel Orientation="Horizontal">
                             <Image
                         x:Name="AppFontIcon"
-                        Width="24"
-                        Height="24"
+                        Width="12"
+                        Height="12"
                         Margin="0,2,0,0"
                         HorizontalAlignment="Left"
                         VerticalAlignment="Center"
-                        Source="ms-appx:///Assets/Square44x44Logo.png" />
+                        Source="Assets/WindowIcon.ico" />
                             <TextBlock
                         x:Name="AppTitle"
                         Margin="12,2,4,0"

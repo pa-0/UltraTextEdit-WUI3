@@ -1,4 +1,5 @@
-﻿using UltraTextEdit.Helpers;
+﻿using Microsoft.UI.Xaml;
+using UltraTextEdit.Helpers;
 
 namespace UltraTextEdit;
 
@@ -8,8 +9,16 @@ public sealed partial class MainWindow : WindowEx
     {
         InitializeComponent();
 
-        AppWindow.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
+        //Window.SetIcon(Path.Combine(AppContext.BaseDirectory, "Assets/WindowIcon.ico"));
         Content = null;
         Title = "AppDisplayName".GetLocalized();
+        ExtendsContentIntoTitleBar = true;
+        SetTitleBar(TitleBar);
+
+    }
+
+    private void showinsiderinfo(object sender, RoutedEventArgs e)
+    {
+        ToggleThemeTeachingTip1.IsOpen = true;
     }
 }
