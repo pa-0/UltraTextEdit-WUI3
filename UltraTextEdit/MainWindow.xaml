@@ -14,7 +14,7 @@
     <windowex:WindowEx.Backdrop>
         <windowex:MicaSystemBackdrop/>
     </windowex:WindowEx.Backdrop>
-    <StackPanel Height="Auto">
+    <StackPanel Height="Auto" x:FieldModifier="public">
         <Border
                 x:Name="AppTitleBar"
                 Height="30"
@@ -24,8 +24,10 @@
                 Canvas.ZIndex="1"
                 IsHitTestVisible="True"
                 RelativePanel.AlignLeftWithPanel="True"
-                RelativePanel.AlignRightWithPanel="True">
-            <StackPanel Orientation="Horizontal">
+                RelativePanel.AlignRightWithPanel="True"
+            x:FieldModifier="public">
+            <StackPanel Orientation="Horizontal"
+                        x:FieldModifier="public">
                 <Image
                         x:Name="AppFontIcon"
                         Width="12"
@@ -46,10 +48,10 @@
                         Padding="5,0"
                         VerticalAlignment="Center"
                         Text="* Not Saved"
-                        ToolTipService.ToolTip="There are unsaved changes." />
+                        ToolTipService.ToolTip="There are unsaved changes." x:FieldModifier="public"/>
             </StackPanel>
 
         </Border>
-        <Frame x:Name="AppContent" Height="1024"></Frame>
+        <Frame x:Name="AppContent" Height="1024" x:FieldModifier="public"></Frame>
     </StackPanel>
 </windowex:WindowEx>

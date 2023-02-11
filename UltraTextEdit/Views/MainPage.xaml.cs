@@ -17,7 +17,7 @@ namespace UltraTextEdit.Views;
 
 public sealed partial class MainPage : Page
 {
-    private string appTitleStr;
+    public string appTitleStr;
     private bool saved;
     private bool _wasOpen;
     private object fileNameWithPath;
@@ -65,19 +65,20 @@ public sealed partial class MainPage : Page
 
     private void RichEditBox_TextChanged(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
     {
+        MainWindow window = new MainWindow();
         editor.Document.GetText(TextGetOptions.UseObjectText, out var textStart);
 
-        //if (textStart == "" || string.IsNullOrWhiteSpace(textStart) || _wasOpen)
-        //{
-        //    saved = true;
-        //}
-        //else
-        //{
-        //    saved = false;
-        //}
+        if (textStart == "" || string.IsNullOrWhiteSpace(textStart) || _wasOpen)
+        {
+            saved = true;
+        }
+        else
+        {
+            saved = false;
+        }
 
-        //if (!saved) UnsavedTextBlock.Visibility = Visibility.Visible;
-        //else UnsavedTextBlock.Visibility = Visibility.Collapsed;
+        if (!saved) window.UnsavedTextBlock.Visibility = Visibility.Visible;
+        else window.UnsavedTextBlock.Visibility = Visibility.Collapsed;
     }
 
     private void OnKeyboardAcceleratorInvoked(Microsoft.UI.Xaml.Input.KeyboardAccelerator sender, Microsoft.UI.Xaml.Input.KeyboardAcceleratorInvokedEventArgs args)

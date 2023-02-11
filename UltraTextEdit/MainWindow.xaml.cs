@@ -1,4 +1,5 @@
 ﻿using Microsoft.UI.Xaml;
+using Microsoft.UI.Xaml.Controls;
 using UltraTextEdit.Helpers;
 using UltraTextEdit.Views;
 
@@ -15,6 +16,8 @@ public sealed partial class MainWindow : WindowEx
         Title = "AppDisplayName".GetLocalized();
         ExtendsContentIntoTitleBar = true;
         SetTitleBar(AppTitleBar);
+        var page = new MainPage();
+        page.appTitleStr = AppTitle.Text;
 
     }
 
