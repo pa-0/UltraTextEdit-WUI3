@@ -58,10 +58,8 @@ public sealed partial class MainPage : Page
     {
         ViewModel = App.GetService<MainViewModel>();
         InitializeComponent();
-        MainWindow window = new MainWindow();
-        window.ExtendsContentIntoTitleBar = true;
-        window.SetTitleBar(TitleBar);
-        appTitleStr= window.Title;
+        //MainWindow window = new MainWindow();
+        //appTitleStr= window.Title;
 
 }
 
@@ -105,11 +103,6 @@ public sealed partial class MainPage : Page
                 //SaveFile(false);
                 break;
         }
-    }
-
-    private void showinsiderinfo(object sender, Microsoft.UI.Xaml.RoutedEventArgs e)
-    {
-        ToggleThemeTeachingTip1.IsOpen = true;
     }
 
     private void BoldButton_Click(object sender, RoutedEventArgs e)
@@ -182,7 +175,8 @@ public sealed partial class MainPage : Page
 
     private async void SaveFile(bool isCopy)
     {
-        string fileName = AppTitle.Text.Replace(" - " + appTitleStr, "");
+        MainWindow window = new MainWindow();
+        string fileName = window.AppTitle.Text.Replace(" - " + appTitleStr, "");
         if (isCopy || fileName == "Untitled")
         {
             FileSavePicker savePicker = App.MainWindow.CreateSaveFilePicker();
@@ -222,7 +216,7 @@ public sealed partial class MainPage : Page
                 }
                 saved = true;
                 fileNameWithPath = file.Path;
-                AppTitle.Text = file.Name + " - " + appTitleStr;
+                window.AppTitle.Text = file.Name + " - " + appTitleStr;
                 Windows.Storage.AccessCache.StorageApplicationPermissions.MostRecentlyUsedList.Add(file);
             }
         }
@@ -258,7 +252,7 @@ public sealed partial class MainPage : Page
                         await errorBox.ShowAsync();
                     }
                     saved = true;
-                    AppTitle.Text = file.Name + " - " + appTitleStr;
+                    window.AppTitle.Text = file.Name + " - " + appTitleStr;
                     Windows.Storage.AccessCache.StorageApplicationPermissions.FutureAccessList.Remove("CurrentlyOpenFile");
                 }
             }
@@ -278,6 +272,7 @@ public sealed partial class MainPage : Page
         open.FileTypeFilter.Add(".txt");
 
         Windows.Storage.StorageFile file = await open.PickSingleFileAsync();
+        MainWindow window = new MainWindow();
 
         if (file != null)
         {
@@ -290,7 +285,7 @@ public sealed partial class MainPage : Page
                 // Load the file into the Document property of the RichEditBox.
                 editor.Document.LoadFromStream(TextSetOptions.FormatRtf, randAccStream);
                 //editor.Document.SetText(Windows.UI.Text.TextSetOptions.FormatRtf, text);
-                AppTitle.Text = file.Name + " - " + appTitleStr;
+                window.AppTitle.Text = file.Name + " - " + appTitleStr;
                 fileNameWithPath = file.Path;
             }
             saved = true;
