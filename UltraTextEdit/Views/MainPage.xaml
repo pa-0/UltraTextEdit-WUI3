@@ -305,6 +305,9 @@
                             </AppBarToggleButton>
                             <AppBarSeparator />
                         </controls:TabbedCommandBarItem>
+                        <controls:TabbedCommandBarItem Header="Help" Background="Transparent">
+                            <AppBarButton Icon="Help" Label="Open Version Reporter Applet" Click="vraopen"/>
+                        </controls:TabbedCommandBarItem>
                     </controls:TabbedCommandBar.MenuItems>
                 </controls:TabbedCommandBar>
                 <SplitView

@@ -431,4 +431,12 @@ public sealed partial class MainPage : Page
             charFormatting.Strikethrough = charFormatting.Strikethrough == FormatEffect.On ? FormatEffect.Off : FormatEffect.On;
         }
     }
+
+    private async void vraopen(object sender, RoutedEventArgs e)
+    {
+        VRAWindow window = new VRAWindow();
+
+
+        window.Activate();
+    }
 }
