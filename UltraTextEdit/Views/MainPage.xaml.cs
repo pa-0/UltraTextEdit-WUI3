@@ -209,16 +209,16 @@ public sealed partial class MainPage : Page
 
                 // Let Windows know that we're finished changing the file so the
                 // other app can update the remote version of the file.
-                FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
-                if (status != FileUpdateStatus.Complete)
-                {
-                    Windows.UI.Popups.MessageDialog errorBox = new("File " + file.Name + " couldn't be saved.");
-                    await errorBox.ShowAsync();
-                }
+                //FileUpdateStatus status = await CachedFileManager.CompleteUpdatesAsync(file);
+                //if (status != FileUpdateStatus.Complete)
+                //{
+                //    Windows.UI.Popups.MessageDialog errorBox = new("File " + file.Name + " couldn't be saved.");
+                //    await errorBox.ShowAsync();
+                //}
                 saved = true;
                 fileNameWithPath = file.Path;
                 window.AppTitle.Text = file.Name + " - " + appTitleStr;
-                Windows.Storage.AccessCache.StorageApplicationPermissions.MostRecentlyUsedList.Add(file);
+                //Windows.Storage.AccessCache.StorageApplicationPermissions.MostRecentlyUsedList.Add(file);
             }
         }
         else if (!isCopy || fileName != "Untitled")
