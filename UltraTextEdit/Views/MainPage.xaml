@@ -92,6 +92,11 @@
                             <AppBarToggleButton Icon="Bold" Label="Bold" Click="BoldButton_Click"/>
                             <AppBarToggleButton Icon="Italic" Label="Italic" Click="ItalicButton_Click"/>
                             <AppBarToggleButton Icon="Underline" Label="Underline" Click="UnderlineButton_Click"/>
+                            <AppBarToggleButton Label="Strikethrough" Checked="StrikeButton_Click">
+                                <AppBarToggleButton.Icon>
+                                    <FontIcon Glyph="&#xEDE0;"/>
+                                </AppBarToggleButton.Icon>
+                            </AppBarToggleButton>
                             <AppBarSeparator />
                             <AppBarButton
                     Click="AlignLeftButton_Click"

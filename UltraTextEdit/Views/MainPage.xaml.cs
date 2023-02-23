@@ -420,4 +420,15 @@ public sealed partial class MainPage : Page
     {
         textsplitview.IsPaneOpen = false;
     }
+
+    private void StrikeButton_Click(object sender, RoutedEventArgs e)
+    {
+        ITextSelection selectedText = editor.Document.Selection;
+
+        if (selectedText != null)
+        {
+            ITextCharacterFormat charFormatting = selectedText.CharacterFormat;
+            charFormatting.Strikethrough = charFormatting.Strikethrough == FormatEffect.On ? FormatEffect.Off : FormatEffect.On;
+        }
+    }
 }
